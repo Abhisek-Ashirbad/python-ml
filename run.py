@@ -10,9 +10,9 @@ from sklearn.svm import LinearSVC
 from sklearn.preprocessing import StandardScaler
 from sklearn import tree, svm, linear_model
 
-genuine_images_path = "data\genuine"
+genuine_images_path = "genuine"
 #genuine_images_path = os.path.abspath("Desktop\Signature-Verification-master old library\data\genuine")
-forged_images_path = "data\duplicate"
+forged_images_path = "duplicate"
 #forged_images_path = os.path.abspath("Desktop\Signature-Verification-master old library\data\duplicate")
 
 genuine_image_filenames = listdir(genuine_images_path)
