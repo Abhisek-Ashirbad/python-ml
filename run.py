@@ -2,6 +2,7 @@ import cv2
 import imagehash
 import numpy as np
 from os import listdir
+import os
 from pylab import *
 from PIL import Image
 from scipy.cluster.vq import *
@@ -9,8 +10,10 @@ from sklearn.svm import LinearSVC
 from sklearn.preprocessing import StandardScaler
 from sklearn import tree, svm, linear_model
 
-genuine_images_path = "data/genuine"
-forged_images_path = "data/forged"
+#genuine_images_path = "data\\genuine"
+genuine_images_path = os.path.abspath("Desktop\Signature-Verification-master old library\data\genuine")
+#forged_images_path = "data\\forged"
+forged_images_path = os.path.abspath("Desktop\Signature-Verification-master old library\data\duplicate")
 
 genuine_image_filenames = listdir(genuine_images_path)
 forged_image_filenames = listdir(forged_images_path)
@@ -82,7 +85,7 @@ def get_contour_features(preprocessed_image, display=False):
         cv2.imshow("a", cv2.resize(convex_hull_image, (0, 0), fx=2.5, fy=2.5))
         cv2.waitKey()
 
-    _, contours, hierarchy = cv2.findContours(preprocessed_image.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(preprocessed_image.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     if display:
         contour_image = cv2.drawContours(preprocessed_image.copy(), contours, -1, (120, 120, 120), 3)
@@ -102,7 +105,7 @@ des_list = []
 
 def sift(preprocessed_image, image_path, display=False):
     raw_image = cv2.imread(image_path)
-    sift = cv2.xfeatures2d.SIFT_create()
+    sift = cv.xfeatures2d.SIFT_create()
     kp, des = sift.detectAndCompute(preprocessed_image, None)
 
     if display:
